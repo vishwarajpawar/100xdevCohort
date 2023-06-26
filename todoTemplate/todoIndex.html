@@ -8,23 +8,15 @@
 </head>
 <body>
   <div class="form-continer">
-  <form action="" onsubmit="onSubmit(event)">
     <label class="input-lable" id="" for="title" >Title: </label>
     <input type="text" class="inputField" id="title" required>
     <label class="input-lable" id="" for="description">description: </label>
     <input type="text" class="inputField" id="description" required>
-    <button>Submit</button>
-  </form>
+    <button  onclick="onSubmit()">Submit</button>
 </div>
 
 <div class="todotable">
 <table id="todolist">
-  <tr>
-    <th>Title</th>
-    <th>completed</th>
-    <th>description</th>
-    <th>id</th>
-  </tr>
 </table>
 </div>
   <script 
