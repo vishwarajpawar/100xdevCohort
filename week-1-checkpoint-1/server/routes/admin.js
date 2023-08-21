@@ -38,6 +38,7 @@ router.post('/signup', (req, res) => {
   
   router.post('/login', async (req, res) => {
     const { username, password } = req.headers;
+    console.log(username+"  "+password);
     const admin = await Admin.findOne({ username, password });
     if (admin) {
       const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });

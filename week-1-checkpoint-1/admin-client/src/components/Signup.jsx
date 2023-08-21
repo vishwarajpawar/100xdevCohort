@@ -5,11 +5,14 @@ import {useState} from "react";
 import axios from "axios";
 import { BASE_URL } from "../config.js";
 import {useNavigate} from "react-router-dom";
+import { userState } from '../store/atoms/user.js';
+import {useSetRecoilState} from "recoil";
 
 function Signup({setUserEmail}) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    const setUser = useSetRecoilState(userState);
 
     return <div>
             <div style={{
@@ -55,7 +58,10 @@ function Signup({setUserEmail}) {
                         let data = response.data;
                         localStorage.setItem("token", data.token);
                         // window.location = "/"
-                        setUserEmail(email)
+                        setUser({
+                            userEmail:email,
+                            isLoading: false
+                        })
                         navigate("/courses")
                     }}
 

@@ -4,11 +4,15 @@ import {Card, Typography} from "@mui/material";
 import {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../store/atoms/user';
+const BASE_URL = 'http://localhost:3000';
 
 function Signin() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    const setUser = useSetRecoilState(userState);
 
     return <div>
             <div style={{
@@ -53,14 +57,21 @@ function Signin() {
                             password: password
                         }, {
                             headers: {
-                                "Content-type": "application/json"
+                                "Content-type": "application/json",
+                                username: email,
+                                password: password
                             }
                         });
                         const data = res.data;
                         
                         localStorage.setItem("token", data.token);
                         // window.location = "/"
-                        setUserEmail(email)
+                        setUser(
+                            {
+                                userEmail:email,
+                                isLoading: false
+                            }
+                        );
                         navigate("/courses")
                     }}
 
